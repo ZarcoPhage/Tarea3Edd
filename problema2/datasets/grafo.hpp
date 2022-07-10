@@ -7,6 +7,11 @@ class tGrafo{
 
 private:
 
+    int nVert;
+    int nEdg;
+    int** p_matrix;
+    int* Marca;
+
 public:
 
     //Constructor.
