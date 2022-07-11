@@ -9,25 +9,32 @@ int main(){
     arr = new char[32];
     string str = "END";
     string sign;
+    string comm;
     bool flag = true;
     while (flag){
-        std::cout<<"ingrese termino: ";
-        std::cin>>arr;
-        std::cout<<"ingrese sign: ";
-        std::cin>>sign;
-        if (strcmp(arr, str.c_str()) == 0){
-            cout<<arr;
-            cout<<str;
+        cout<<"ingrese comando: ";
+        cin>>comm;
+        if (comm == "END"){
             flag = false;
-            break;
         }
-        cout<<"preinsert"<<endl;
-        diccionario.insert(arr, sign);
-        cout<<"postinsert"<<endl;
-        diccionario.printHT();
-        cout<<"end insert"<<endl;
+        if (comm == "insert"){
+            std::cout<<"ingrese termino: ";
+            std::cin>>arr;
+            std::cout<<"ingrese sign: ";
+            std::cin>>sign;
+            cout<<"preinsert"<<endl;
+            diccionario.insert(arr, sign);
+            cout<<"postinsert"<<endl;
+            diccionario.printHT();
+        }
+        if (comm == "query"){
+            cout<<"ingrese termino a buscar: ";
+            cin>>arr;
+            cout<<diccionario.query(arr, sign)<<" "<<sign<<endl;
+        }    
     }
 
 
+    diccionario.printHT();
     return 0;
 }
