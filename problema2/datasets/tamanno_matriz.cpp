@@ -6,7 +6,7 @@
 using namespace std;
 
 
-int tamaño_matriz (int& size){
+int tamanno_matriz (int& size){
 
     ifstream file;
     file.open("miserables_id_to_names.csv");
