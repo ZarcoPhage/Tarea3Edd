@@ -1,5 +1,5 @@
-#ifndef graphs.cpp
-#define graphs.cpp
+#ifndef grafo_hpp
+#define grafo_hpp
 
 typedef int tVertice;
 
