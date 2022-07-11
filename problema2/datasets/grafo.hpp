@@ -11,7 +11,6 @@ private:
     int nEdg;
     int** p_matrix;
     int* Marca;
-
 public:
 
     //Constructor.
