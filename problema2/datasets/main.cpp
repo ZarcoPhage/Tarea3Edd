@@ -42,7 +42,7 @@ int main(){
 
     tGrafo grafo(size);
 
-    crear_y_rellenar_matriz(size, &grafo);
+    crear_y_rellenar_matriz(&grafo);
 
     cout << grafo.isEdge(0, 3) << " " << grafo.weight(0,3) << endl;
     cout << grafo.maxGrado()<<endl;

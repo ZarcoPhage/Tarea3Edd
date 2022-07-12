@@ -9,9 +9,19 @@
 
 using namespace std;
 
-/*
-
-*/
+/*****
+*   tVertice* str_to_int_array
+******
+*   Crea un arreglo con la información de la línea entregada,
+*   sin el componente ';'.
+******
+*   Input:
+*   string line : Linea a guardar en el arreglo.
+*   int* n : Tamaño del arreglo a crear.
+******
+*   Returns:
+*   tVertice*, arreglo con los números que contiene la línea entregada.
+*****/
 
 tVertice* str_to_int_array (string line, int &n){
 
@@ -47,7 +57,19 @@ tVertice* str_to_int_array (string line, int &n){
     
 }
 
-void crear_y_rellenar_matriz (int &size, tGrafo* grafo){
+/*****
+*   void crear_y_rellenar_matriz
+******
+*   Establece las conexiones entre vértices de la matriz de manera ordenada.
+******
+*   Input:
+*   tGrafo* grafo : grafo dónde se harán los cambios.
+******
+*   Returns:
+*   No retorna, solo modifica la matriz asociada al grafo.
+*****/
+
+void crear_y_rellenar_matriz (tGrafo* grafo){
 
     ifstream file;
     file.open("miserables.csv", ios::in);
@@ -77,9 +99,7 @@ void crear_y_rellenar_matriz (int &size, tGrafo* grafo){
 
         delete [] i_line;
     }
-
     delete[] first_line_array;
-
 }
 
 
