@@ -53,6 +53,8 @@ public:
 
     //Marca el vértice con un valor.
     int setMark (tVertice v);
+
+    void printMatrix();
 };
 
 #endif
