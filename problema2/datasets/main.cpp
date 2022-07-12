@@ -6,6 +6,7 @@
 #include "tamanno_matriz.cpp"
 #include "grafo.hpp"
 #include "crear_y_rellenar_matriz.cpp"
+#include "vertice_a_persona.cpp"
 
 
 #define NOVISITADO 0
