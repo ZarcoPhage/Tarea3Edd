@@ -37,11 +37,12 @@ void asignar_nombres (string* id_array, int size){
         int j = stoi(p);
         p = strtok(NULL, ",");
         string name(p);
+        //cout << name << endl;
         id_array[j] = name;
         delete [] new_array;
     }
 }
-
+/*
 int main(){
 
     cout << "introduce el size: " << endl;
@@ -51,5 +52,14 @@ int main(){
     string* p = id_array(size);
 
     asignar_nombres(p, size);
+
+    for (int i = 0 ; i < size ; i++){
+
+        cout << p[i] << " - " ;
+
+    }
+    
+    cout << "" << endl;
     return 0;
 }
+*/

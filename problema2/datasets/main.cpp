@@ -47,6 +47,22 @@ int main(){
     cout << grafo.isEdge(0, 3) << " " << grafo.weight(0,3) << endl;
     cout << grafo.maxGrado()<<endl;
 
+    string* array_nombres;
 
+    
+    cout << "valor de size: "<<size << endl;
+
+    size -= 1;
+    array_nombres = id_array(size);
+
+    asignar_nombres(array_nombres, size);
+
+    for (int i = 0 ; i < size ; i++){
+
+        cout << array_nombres[i] << " - " ;
+
+    }
+
+    cout << " " << endl;
     return 0;
 }
