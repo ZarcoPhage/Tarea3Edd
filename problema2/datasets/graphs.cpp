@@ -119,8 +119,3 @@ int tGrafo::setMark(tVertice v){
     return marca;
 
 }
-<<<<<<< HEAD
-=======
-
-
->>>>>>> 2338c1391a8127585457f4b4422ac938bf9986ee
