@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#define M 128
+#define M 8
 #define VACIA -1
 #define BORRADA -2
 #define OCUPADA -3
@@ -98,7 +98,11 @@ class CacheDiccionario{
                 HashTable[i].estado = VACIA;
                 }
         };
-        ~CacheDiccionario(){};
+        ~CacheDiccionario(){
+            for(int i = 0; i<M; i++){
+                delete[] HashTable[i].termino; 
+            }
+        };
         bool query(string termino, string& significado); //consultar ranura de la HT
         void insert(string termino, string significado); 
         void querystats(int& total, int& conocidos, int& desconocidos);

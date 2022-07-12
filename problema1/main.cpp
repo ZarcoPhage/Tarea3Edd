@@ -34,7 +34,7 @@ int main(){
         }    
     }
 
-
+    delete[] arr;
     diccionario.printHT();
     return 0;
 }
