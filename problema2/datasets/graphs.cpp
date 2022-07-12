@@ -118,3 +118,22 @@ int tGrafo::setMark(tVertice v){
     return marca;
 
 }
+
+tVertice tGrafo::maxGrado(){
+    int grado, gradoMax, i;
+    tVertice w, nodoMax;
+    gradoMax = 0;
+    for(i = 0; i < this->nVertex(); i++){
+        grado = 0; //iniciar grado del nodo a analizar en 0
+        for (w = this->first(i); w < this->nVertex(); w = this->next(i,w)){
+            if(this->isEdge(i,w) == 1){
+                grado++;
+            }
+        }
+        if(grado > gradoMax){
+            gradoMax = grado;
+            nodoMax = i;
+        }
+    }
+    return nodoMax;
+}

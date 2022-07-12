@@ -13,6 +13,7 @@
 
 using namespace std;
 
+
 int minVertex(tGrafo* G, int* D) {
     
     int i, v = -1;
@@ -31,6 +32,7 @@ int minVertex(tGrafo* G, int* D) {
 }
 
 
+
 int main(){
 
     int size;
@@ -42,7 +44,7 @@ int main(){
     crear_y_rellenar_matriz(size, &grafo);
 
     cout << grafo.isEdge(0, 3) << " " << grafo.weight(0,3) << endl;
-
+    cout << grafo.maxGrado()<<endl;
 
 
     return 0;
