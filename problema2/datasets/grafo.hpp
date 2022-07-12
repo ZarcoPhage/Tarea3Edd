@@ -1,7 +1,9 @@
-#ifndef grafo_hpp
-#define grafo_hpp
+#ifndef GRAFO_HPP
+#define GRAFO_HPP
 
 typedef int tVertice;
+
+
 
 class tGrafo{
 

@@ -5,7 +5,6 @@
 
 
 #include "grafo.hpp"
-#include "str_to_int_array.cpp"
 
 
 using namespace std;
@@ -14,7 +13,41 @@ using namespace std;
 
 */
 
-int crear_y_rellenar_matriz (int &size, tGrafo* grafo){
+tVertice* str_to_int_array (string line, int &n){
+
+    char* char_array = new char [line.length()];
+    strcpy(char_array, line.c_str());
+
+    char* p2;
+    char* p3;
+    n = 0;
+    
+    p2 = strtok(char_array, ";");
+    while(p2 != NULL){
+
+        n++;
+        p2 = strtok(NULL, ";");
+    }
+
+    tVertice* firstline_array = new tVertice [n-1];
+    int i = 0;
+
+    strcpy(char_array, line.c_str());
+
+    p3 = strtok(char_array, ";");
+    while(p3 != NULL){
+
+        firstline_array[i] = stoi(p3);
+        i++;
+        p3 = strtok(NULL, ";");
+    }
+
+    delete [] char_array;
+    return firstline_array;
+    
+}
+
+void crear_y_rellenar_matriz (int &size, tGrafo* grafo){
 
     ifstream file;
     file.open("miserables.csv", ios::in);
@@ -28,17 +61,17 @@ int crear_y_rellenar_matriz (int &size, tGrafo* grafo){
     getline(file, stringline);
 
     int fla_size;
-    int* first_line_array = str_to_int_array(stringline, fla_size);
+    tVertice* first_line_array = str_to_int_array(stringline, fla_size);
 
     while(getline(file, stringline)){
 
         int fla2_size;
-        int* i_line = str_to_int_array(stringline, fla2_size);
+        tVertice* i_line = str_to_int_array(stringline, fla2_size);
 
         for (int i = 0 ; i < fla_size ; i++){
 
             grafo->setEdge(first_line_array[i], i_line[0], i_line[i+1]);
-
+            
 
         }
 
@@ -46,7 +79,8 @@ int crear_y_rellenar_matriz (int &size, tGrafo* grafo){
     }
 
     delete[] first_line_array;
-    return fla_size;
-
 
 }
+
+
+

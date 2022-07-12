@@ -1,5 +1,5 @@
 #include "grafo.hpp"
-#include "crear_y_rellenar_matriz.cpp"
+//#include "crear_y_rellenar_matriz.cpp"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -37,6 +37,8 @@ tGrafo::tGrafo(int n){
         }
     }
 }
+
+
 
 tGrafo::~tGrafo(){
 
@@ -117,5 +119,3 @@ int tGrafo::setMark(tVertice v){
     return marca;
 
 }
-
-
