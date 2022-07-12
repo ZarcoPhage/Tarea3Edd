@@ -1,5 +1,5 @@
-#ifndef grafo_hpp
-#define grafo_hpp
+#ifndef GRAFO_HPP
+#define GRAFO_HPP
 
 typedef int tVertice;
 
@@ -51,6 +51,8 @@ public:
 
     //Marca el vértice con un valor.
     int setMark (tVertice v);
+
+    void printMatrix();
 };
 
 #endif

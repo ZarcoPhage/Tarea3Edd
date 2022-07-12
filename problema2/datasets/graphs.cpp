@@ -1,5 +1,4 @@
 #include "grafo.hpp"
-#include "crear_y_rellenar_matriz.cpp"
 #include <fstream>
 #include <iostream>
 #include <string>
@@ -118,4 +117,12 @@ int tGrafo::setMark(tVertice v){
 
 }
 
-
+void tGrafo::printMatrix(){
+    int i, j;
+    for (i = 0; i < nVert; i++){
+        for(j = 0; j<nVert;j++){
+            cout<<p_matrix[i][j]<<"|";
+        }
+        cout<<endl;
+    }
+}
