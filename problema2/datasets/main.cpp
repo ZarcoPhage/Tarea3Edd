@@ -200,7 +200,7 @@ int main(){
     cout << "Personaje Principal: "  << array_nombres[principal] << endl;
     cout << "Personaje secundario mas relevante: " << array_nombres[secundario] << endl;
     cout << "Diametro: " << a << endl;
-    cout << "Diametro (con pesos): " << l;
+    cout << "Diametro (con pesos): " << l << endl;
 
     delete [] array_nombres;
     delete [] D;
