@@ -32,6 +32,23 @@ int minVertex(tGrafo* G, int* D) {
     return v;
 }
 
+void Dijkstra(tGrafo* G, int* D, tVertice s) {
+    
+    int v, w;
+    for (int i = 0 ; i < G->nVertex() ; i++) { 
+
+        v = minVertex(G, D);
+        if (D[v] == INFINITY){ 
+        return; 
+        }
+        G->setMark(v, VISITADO);
+
+        for ( w = G->first(v) ; w < G->nVertex(); w = G->next(v,w) )
+            if (D[w] > (D[v] + G->weight(v, w) ) )
+                D[w] = D[v] + G->weight(v, w);
+    }
+}
+
 
 
 int main(){
@@ -49,20 +66,24 @@ int main(){
 
     string* array_nombres;
 
-    
-    cout << "valor de size: "<<size << endl;
-
     size -= 1;
     array_nombres = id_array(size);
 
     asignar_nombres(array_nombres, size);
 
-    for (int i = 0 ; i < size ; i++){
+    /*for (int i = 0 ; i < size ; i++){
 
         cout << array_nombres[i] << " - " ;
 
-    }
+    }*/
 
+    tVertice principal = grafo.maxGrado();
+    tVertice secundario = grafo.secondcharacter(principal); 
+    cout << "Personaje principal = " << array_nombres[principal] << endl;
+    cout << "Personaje secundario = " << array_nombres[secundario] << endl;
+
+    cout << "Peso de " << array_nombres[principal] << " y " << array_nombres[secundario] << " es de: " << grafo.weight(principal, secundario) << endl;
     cout << " " << endl;
+    delete [] array_nombres;
     return 0;
 }

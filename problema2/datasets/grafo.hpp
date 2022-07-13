@@ -43,7 +43,7 @@ public:
     void deleteEdge (tVertice v1, tVertice v2);
 
     //Indica si existe un arco entre los vértices.
-    int isEdge (tVertice v1, tVertice v2);
+    bool isEdge (tVertice v1, tVertice v2);
 
     //Indica el peso del arco entre vértices, si no existe un arco, retorna 0.
     int weight (tVertice v1, tVertice v2);
@@ -52,9 +52,11 @@ public:
     int getMark (tVertice v);
 
     //Marca el vértice con un valor.
-    int setMark (tVertice v);
+    void setMark (tVertice v, int val);
 
     tVertice maxGrado();
+
+    tVertice secondcharacter(tVertice principal);
 };
 
 #endif
