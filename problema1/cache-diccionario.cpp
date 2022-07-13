@@ -21,6 +21,20 @@ struct ranurasLimp{
     unsigned int consultas;
 };
 
+/*****
+*   void heapy
+******
+*   ordena y crea un maxHeap con el arreglo entregado
+******
+*   Input:
+*       ranurasLimp* ranurasAlimpiar : arreglo correspondiente a las ranuras de la HashTable que contiene el termino
+*                                      y sus consultas respectivas
+*       int i : indice de la raíz, iteración del ciclo con cual se llamó a la función
+******
+*   Return:
+*       void, no retorna
+*****/
+
 void heapy(ranurasLimp* ranurasAlimpiar, int i){
     int mayor = i;
     int izq = 2*i + 1;
@@ -38,6 +52,19 @@ void heapy(ranurasLimp* ranurasAlimpiar, int i){
     }
 }
 
+/*****
+*   void heapSort
+******
+*   ordena el arreglo entregado usando maxHeaps y cambiando posiciones del arreglo segun sea necesario
+******
+*   Input:
+*       ranurasLimp* ranurasAlimpiar : arreglo correspondiente a las ranuras de la HashTable que contiene el termino
+*                                      y sus consultas respectivas       
+******
+*   Return:
+*       void, no retorna
+*****/
+
 void heapSort(ranurasLimp* ranurasAlimpiar){
     int i;
     for (i = M/2 -1; i>=0; i--){
@@ -48,6 +75,19 @@ void heapSort(ranurasLimp* ranurasAlimpiar){
         heapy(ranurasAlimpiar, i);
     }
 }
+
+/*****
+*   unsigned int folder
+******
+*   transforma el término en una clave de tipo entero que posteriormente se procesará, esta asignación
+*   de numero entero se hace a través del método de plegamiento
+******
+*   Input:
+*       string termino : termino que se desea plegar     
+******
+*   Return:
+*       unsigned int, clave entera correspondiente al termino entregado
+*****/
 
 unsigned int folder(string termino){
     int len, i;
@@ -110,9 +150,35 @@ class CacheDiccionario{
         void printHT();
 };
 
+/*****
+*   unsigned int probing
+******
+*   aplica resolución de colisiones a partir de hashing cuadrático simple
+******
+*   Input:
+*       int key : clave retornada por el primer hash
+*       int index : indice de la iteración de ciclo con el cual se llamo, indicando numero de colisiones
+******
+*   Return:
+*       unsigned int, resolución de colisiones resultante a partir del numero de iteración entregada
+*****/
+
 unsigned int CacheDiccionario::probing(int key, int index){
     return index*index;
 }   
+
+/*****
+*   void cleaner
+******
+*   Función que limpia la tabla hash del diccionario en caso de ser necesario, borrando la mitad de elementos totales que
+*   cuenten con menor cantidad de consultas
+******
+*   Input:
+*       no recibe input
+******
+*   Return:
+*       void, no retorna
+*****/
 
 void CacheDiccionario::cleaner(){
     int i, o, foldTerm, pos, inicio, optimizador, ranBorradas;
@@ -169,6 +235,18 @@ void CacheDiccionario::cleaner(){
     ranurasOcupadas = ranurasOcupadas - ranBorradas;
 }
 
+/*****
+*   void printHT
+******
+*   imprime la HashTable del diccionario
+******
+*   Input:
+*       no recibe input       
+******
+*   Return:
+*       void, no retorna
+*****/
+
 void CacheDiccionario::printHT(){
     cout<<consultasTotales<<":"<<signConocidos<<":"<<signDesconocidos<<":"<<limpiezas<<":"<<encontrados<<":"<<noEncontrados<<":"<<accesos<<endl;
     for (int i = 0; i < M; i++){
@@ -176,7 +254,19 @@ void CacheDiccionario::printHT(){
     }
 
 }
- 
+
+/*****
+*   unsigned int hashFunc
+******
+*   asigna una posición en la HashTable a través de método de cuadrado medio
+******
+*   Input:
+*       int foldedTermino : clave entera correspondiente a un término      
+******
+*   Return:
+*       unsigned int, ranura de la HashTable asignada por método de cuadrado medio a un término específico previamente plegado
+*****/
+
 unsigned int CacheDiccionario::hashFunc(int foldedTermino){
     int claveCuadrada, len, i, hashPos;
     if(foldedTermino == 0){
@@ -194,6 +284,19 @@ unsigned int CacheDiccionario::hashFunc(int foldedTermino){
     hashPos = stoi(valorMedio) % M; //toma el valor cuadrado medio y lo divide por la cantidad de ranuras que tenemos, el módulo es la posición indicada 
     return hashPos;
 }
+
+/*****
+*   void insert
+******
+*   inserta un término y su significado en una ranura de la HashTable y, por lo tanto, al diccionario
+******
+*   Input:
+*       string termino : termino que se desea insertar en el diccionario
+*       string significado : significado correspondiente al termino que se desea almacecar
+******
+*   Return:
+*       void, no retorna
+*****/
 
 void CacheDiccionario::insert(string termino, string significado){
     int claveInt;
@@ -246,6 +349,21 @@ void CacheDiccionario::insert(string termino, string significado){
     }
 }
 
+/*****
+*   bool query
+******
+*   consulta por un término y retorna su significado por referencia si el término existe, 
+*   en el caso de no existir en la tabla, retorna un string vacío por referencia y un valor falso
+*   indicando que el término no se encuentra en la tabla
+******
+*   Input:
+*       string termino : termino que se desea consultar en el diccionario
+*       string& significado : paso por referencia de una variable donde se almacenará el significado del término en caso de encontrarse
+******
+*   Return:
+*       bool, valor que indica la existencia del término en la HashTable
+*****/
+
 bool CacheDiccionario::query(string termino, string &significado){
     consultasTotales++;
     int inicio, i;
@@ -286,11 +404,45 @@ bool CacheDiccionario::query(string termino, string &significado){
     }
 }
 
+/*****
+*   void queryStats
+******
+*   indica las estadísticas de las consultas del diccionario (total de consultas, significados conocidos y desconocidos)
+*   retornando por referencia los valores respectivos
+******
+*   Input:
+*       int& total : paso por referencia de la variable donde se almacenará el total de consultas del diccionario
+*       int& conocidos : paso por referencia de la variable donde se almacenará la cantidad de significados conocidos del diccionario
+*       int& desconocidos : paso por referencia de la variable donde se almacenará la cantidad de significados desconocidos del diccionario       
+******
+*   Return:
+*       void, no retorna
+*****/
+
 void CacheDiccionario::querystats(int &total, int &conocidos, int &desconocidos){
     total = consultasTotales;
     conocidos = signConocidos;
     desconocidos = signDesconocidos;
 }
+
+/*****
+*   void perfStats
+******
+*   entrega estadísticas del rendimiento del diccionario
+******
+*   Input:
+*       int& accesses : paso por referencia de la variable donde se almacenará el total de accesos realizados
+*                       a la HashTable     
+*       int& hits : paso por referencia de la variable donde se almacenará la cantidad de veces que se encontró
+*                   un término consultado
+*       int& misses : paso por referencia de la variable donde se almacenará la cantidad de veces que no se encontró
+*                     un término consultado
+*       int& cleanups : paso por referencia de la variable donde se almacenará la cantidad de limpiezas realizadas a la
+*                       HashTable del diccionario
+******
+*   Return:
+*       void, no retorna
+*****/
 
 void CacheDiccionario::perfstats(int& accesses, int& hits, int& misses, int& cleanups){
     accesses = accesos;
