@@ -25,7 +25,7 @@ using namespace std;
 *   int* D : arreglo donde estan guardados los valores de Dijkstra.
 ******
 *   Returns:
-*   v : 
+*   v : vertice de mínima distancia.
 *****/
 int minVertex(tGrafo* G, int* D) {
     
