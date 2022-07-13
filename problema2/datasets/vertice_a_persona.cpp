@@ -39,6 +39,7 @@ string* id_array (int size){
 *****/
 void asignar_nombres (string* id_array, int size){
 
+    
     ifstream file;
     file.open("miserables_id_to_names.csv");
 
@@ -62,10 +63,13 @@ void asignar_nombres (string* id_array, int size){
         int j = stoi(p);
         p = strtok(NULL, ",");
         string name(p);
-        //cout << name << endl;
+        cout << name << endl;
         id_array[j] = name;
         delete [] new_array;
     }
+
+    file.close();
+
 }
 /*
 int main(){

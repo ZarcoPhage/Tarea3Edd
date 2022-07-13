@@ -100,6 +100,7 @@ void crear_y_rellenar_matriz (tGrafo* grafo){
         delete [] i_line;
     }
     delete[] first_line_array;
+    file.close();
 }
 
 

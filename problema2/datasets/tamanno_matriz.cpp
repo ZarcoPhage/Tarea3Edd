@@ -24,7 +24,8 @@ int tamanno_matriz (int& size){
 
         size++;
     }
-
+    file.close();
     return size-1;
+
 
 }

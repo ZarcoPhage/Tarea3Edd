@@ -11,6 +11,7 @@
 
 #define NOVISITADO 0
 #define VISITADO 1
+#define INFINITY 4000
 
 using namespace std;
 
@@ -34,6 +35,22 @@ int minVertex(tGrafo* G, int* D) {
 
 void Dijkstra(tGrafo* G, int* D, tVertice s) {
     
+    int size = G->nVertex();
+    
+    D = new int [size];
+
+    D[s] = 0;
+
+    for (int i = 0 ; i < size ; i++){
+
+        if (D[i] == 0){
+            break;
+        }
+        else{
+            D[i] = INFINITY;
+        }
+    }
+
     int v, w;
     for (int i = 0 ; i < G->nVertex() ; i++) { 
 
@@ -54,7 +71,7 @@ void Dijkstra(tGrafo* G, int* D, tVertice s) {
 int main(){
 
     int size;
-
+    int* D;
     tamanno_matriz(size);
 
     tGrafo grafo(size);
@@ -68,22 +85,19 @@ int main(){
 
     size -= 1;
     array_nombres = id_array(size);
-
     asignar_nombres(array_nombres, size);
 
-    /*for (int i = 0 ; i < size ; i++){
-
-        cout << array_nombres[i] << " - " ;
-
-    }*/
 
     tVertice principal = grafo.maxGrado();
-    tVertice secundario = grafo.secondcharacter(principal); 
-    cout << "Personaje principal = " << array_nombres[principal] << endl;
-    cout << "Personaje secundario = " << array_nombres[secundario] << endl;
+    
+    Dijkstra(&grafo, D, grafo.maxGrado());
 
-    cout << "Peso de " << array_nombres[principal] << " y " << array_nombres[secundario] << " es de: " << grafo.weight(principal, secundario) << endl;
-    cout << " " << endl;
+    tVertice secundario;
+    secundario = grafo.secondcharacter(D);
+
+    cout << "Personaje secundario: "  << array_nombres[secundario] << endl;
+
     delete [] array_nombres;
+    delete [] D;
     return 0;
 }
