@@ -12,11 +12,21 @@
 
 #define NOVISITADO -1
 #define VISITADO 1
-//#define INFINITY intmax_t
 
 using namespace std;
 
-
+/*****
+*   int minVertex.
+******
+*   Escanear la lista de vértices en busca del valor mínimo.
+******
+*   Input:
+*   tGrafo* G : grafo donde se hará correr la función.
+*   int* D : arreglo donde estan guardados los valores de Dijkstra.
+******
+*   Returns:
+*   v : 
+*****/
 int minVertex(tGrafo* G, int* D) {
     
     int i;
@@ -31,6 +41,22 @@ int minVertex(tGrafo* G, int* D) {
     return v;
 }
 
+
+
+/*****
+*   void Dijkstra.
+******
+*   Algoritmo de Dijkstra, el cual busca el camino más corto a cualquier vértice a partir de un 
+*   vértice base. 
+******
+*   Input:
+*   tGrafo* G : grafo donde se hará correr la función.
+*   int* D : arreglo donde serán guardados los valores de Dijkstra.
+*   tVertice s : vértice base.
+******
+*   Returns:
+*   No retorna, solo modifica el valor de D. 
+*****/
 void Dijkstra(tGrafo* G, int* D, tVertice s) {
 
     int i, v, w;
@@ -47,6 +73,21 @@ void Dijkstra(tGrafo* G, int* D, tVertice s) {
 }
 
 
+
+/*****
+*   void Dijkstra2.
+******
+*   Algoritmo de Dijkstra, el cual busca el camino más corto a cualquier vértice a partir de un 
+*   vértice base, solo que ahora suma 1 o 0.
+******
+*   Input:
+*   tGrafo* G : grafo donde se hará correr la función.
+*   int* D : arreglo donde serán guardados los valores de Dijkstra.
+*   tVertice s : vértice base.
+******
+*   Returns:
+*   No retorna, solo modifica el valor de D. 
+*****/
 void Dijkstra2(tGrafo* G, int* D, tVertice s) {
 
     int i, v, w;
@@ -63,10 +104,23 @@ void Dijkstra2(tGrafo* G, int* D, tVertice s) {
 }
 
 
+
+/*****
+*   void caminoCorto.
+******
+*   Suma el valor de Dijkstra2 en una variable para cada nodo del vértice. 
+******
+*   Input:
+*   tGrafo* G : grafo donde se hará correr la función.
+*   int size : tamaño de la matriz.
+******
+*   Returns:
+*   sumaTotal = valor de cada casilla del arreglo D aplicandole algoritmo de Dijkstra2 "size" veces. 
+*****/
 int caminoCorto(tGrafo* G, int size){
 
     int sumatotal = 0;
-    G->restablecermarca();
+    G->restablecerMarca();
     for (int i = 0 ; i < G->nVertex() ; i++){
 
         int* D = new int [G->nVertex()];
@@ -81,15 +135,29 @@ int caminoCorto(tGrafo* G, int size){
             sumatotal+= D[k];
         }
         delete [] D;
-        G->restablecermarca();
+        G->restablecerMarca();
     }
     return sumatotal;
 }
 
+
+
+/*****
+*   void caminoCortoPesos.
+******
+*   Suma el valor de Dijkstra en una variable para cada nodo del vértice. 
+******
+*   Input:
+*   tGrafo* G : grafo donde se hará correr la función.
+*   int size : tamaño de la matriz.
+******
+*   Returns:
+*   sumaTotal = valor de cada casilla del arreglo D aplicandole algoritmo de Dijkstra "size" veces. 
+*****/
 int caminoCortoPesos(tGrafo* G, int size){
 
     int sumatotal = 0;
-    G->restablecermarca();
+    G->restablecerMarca();
     for (int i = 0 ; i < G->nVertex() ; i++){
 
         int* D = new int [G->nVertex()];
@@ -104,20 +172,11 @@ int caminoCortoPesos(tGrafo* G, int size){
             sumatotal+= D[k];
         }
         delete [] D;
-        G->restablecermarca();
+        G->restablecerMarca();
     }
     return sumatotal;
 
 }
-
-/*
-unsigned long long factorial(int n) {
-   if(n == 0) return 1;
-   else if(n > 1) return n*factorial(n-1);
-   return 1;
-}
-*/
-
 
 
 int main(){
@@ -129,17 +188,7 @@ int main(){
     tGrafo grafo(size);
 
     crear_y_rellenar_matriz(&grafo);
-    /*
-    cout << grafo.isEdge(8, 1) << " " << grafo.weight(8,1) << endl;
-
-    for (int i = 0 ; i < size ; i++){
-
-        cout << grafo.weight(0,i) << " - " ;
-
-    }
-    cout << "" << endl;
-    cout << grafo.maxGrado()<<endl;
-    */
+    
     string* array_nombres;
 
     size -= 1;
@@ -160,42 +209,28 @@ int main(){
     Dijkstra(&grafo, D, principal);
 
     tVertice secundario;
-    secundario = grafo.secondcharacter(D);
-
-    //cout << "numero de vertices: " << grafo.nVertex() << endl;
-    //cout << "numero de size: " << size << endl;
-
-    //cout << "Personaje secundario: "  << array_nombres[secundario] << endl;
-
-    int suma;
+    secundario = grafo.secondCharacter(D);
+    int suma, sumaEdg;
 
     suma = caminoCortoPesos(&grafo, size);
+    sumaEdg = grafo.sumaDeArcos();
 
-    //cout << " la suma es: " << suma << endl;
-
-    int sumaEdg;
-
-    sumaEdg = grafo.sumadearcos();
-
-    //cout << " la sumaEdg es: " << sumaEdg << endl;
+    
 
     float f = suma;
     float l;
     l = f/sumaEdg;
 
-    //cout << "la longuitud de camino promedio con pesos es: " << l << endl; 
+    
     
     int suma2;
-
     suma2 = caminoCorto(&grafo, size);
-    //cout << "suma2 = "  << suma2 << endl;
+    
 
     float combinatoria = ((76*75)/2);
-
     float a = suma2/combinatoria;
 
-    //cout << combinatoria << endl;
-    //cout << a << endl;
+    
 
     cout << "Personaje Principal: "  << array_nombres[principal] << endl;
     cout << "Personaje secundario mas relevante: " << array_nombres[secundario] << endl;

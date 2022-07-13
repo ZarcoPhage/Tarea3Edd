@@ -24,6 +24,7 @@ string* id_array (int size){
 }
 
 
+
 /*****
 *   void asignar_nombres.
 ******
@@ -71,24 +72,3 @@ void asignar_nombres (string* id_array, int size){
     file.close();
 
 }
-/*
-int main(){
-
-    cout << "introduce el size: " << endl;
-    int size;
-    cin >> size;
-
-    string* p = id_array(size);
-
-    asignar_nombres(p, size);
-
-    for (int i = 0 ; i < size ; i++){
-
-        cout << p[i] << " - " ;
-
-    }
-    
-    cout << "" << endl;
-    return 0;
-}
-*/

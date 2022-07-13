@@ -6,17 +6,16 @@
 using namespace std;
 
 /*****
-*   tVertice* str_to_int_array
+*   int tamanno_matriz.
 ******
-*   Crea un arreglo con la información de la línea entregada,
-*   sin el componente ';'.
+*   Lee el largo del archivo para definir el tamaño de la matriz
+*   a crear.
 ******
 *   Input:
-*   string line : Linea a guardar en el arreglo.
-*   int* n : Tamaño del arreglo a crear.
+*   int &size : Tamaño de la matriz.
 ******
 *   Returns:
-*   tVertice*, arreglo con los números que contiene la línea entregada.
+*   size-1, cantidad de lineas que contiene el archivo, menos la primera linea.
 *****/
 int tamanno_matriz (int& size){
 

@@ -22,7 +22,6 @@ using namespace std;
 *   Returns:
 *   tVertice*, arreglo con los números que contiene la línea entregada.
 *****/
-
 tVertice* str_to_int_array (string line, int &n){
 
     char* char_array = new char [line.length()];
@@ -57,6 +56,8 @@ tVertice* str_to_int_array (string line, int &n){
     
 }
 
+
+
 /*****
 *   void crear_y_rellenar_matriz
 ******
@@ -68,7 +69,6 @@ tVertice* str_to_int_array (string line, int &n){
 *   Returns:
 *   No retorna, solo modifica la matriz asociada al grafo.
 *****/
-
 void crear_y_rellenar_matriz (tGrafo* grafo){
 
     ifstream file;
