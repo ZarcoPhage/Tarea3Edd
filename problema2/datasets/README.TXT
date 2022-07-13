@@ -13,7 +13,7 @@ COMPILACIÓN
 - Comando de compilacion:
   $ g++ -g main.cpp graphs.cpp -o main -Wall
 
-- genera el archivo 'main' en el directorio Tarea3Edd/problema2
+- genera el archivo 'main' en el directorio Tarea3Edd/problema2/datasets
 --------------------------------------------------------------------
 EJECUCIÓN
 --------------------------------------------------------------------
