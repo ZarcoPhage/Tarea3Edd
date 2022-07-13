@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <cstring>
-#define M 8
+#define M 128
 #define VACIA -1
 #define BORRADA -2
 #define OCUPADA -3

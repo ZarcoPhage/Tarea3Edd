@@ -47,4 +47,6 @@ $ insert <termino> <significado>
 $ query <termino>
     - para consultar por un termino al diccionario
 $ END
-    - para terminar de ocupar el diccionario e imprimir en pantalla la tabla correspondiente    
+    - para terminar de ocupar el diccionario e imprimir en pantalla la tabla correspondiente   
+
+Para agregar ranuras, cambiar la definicion de M en el archivo cache-diccionario.cpp por el numero que se desee 
