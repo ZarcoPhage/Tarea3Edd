@@ -96,7 +96,7 @@ void tGrafo::deleteEdge(tVertice v1, tVertice v2){
 
 }
 
-int tGrafo::isEdge(tVertice v1, tVertice v2){
+bool tGrafo::isEdge(tVertice v1, tVertice v2){
 
     return p_matrix[v1][v2] != 0;
 }
@@ -111,11 +111,9 @@ int tGrafo::getMark(tVertice v){
     return Marca[v];
 }
 
-int tGrafo::setMark(tVertice v){
+void tGrafo::setMark(tVertice v, int val){
 
-    int marca = 1;
-    Marca[v] = marca;
-    return marca;
+    Marca[v] = val;
 
 }
 
@@ -136,4 +134,21 @@ tVertice tGrafo::maxGrado(){
         }
     }
     return nodoMax;
+}
+
+tVertice tGrafo::secondcharacter(tVertice principal){
+
+    int peso, mayor = 0;
+    tVertice secundario;
+
+    for (int i = 0 ; i < this->nVertex() ; i++ ){
+
+        peso = this->weight(principal, i);
+        if (peso > mayor){
+
+            secundario = i;
+            mayor = peso;
+        }
+    }
+    return secundario;
 }
