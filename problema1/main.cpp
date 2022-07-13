@@ -22,9 +22,9 @@ int main(){
             std::cin>>arr;
             std::cout<<"ingrese sign: ";
             std::cin>>sign;
-            cout<<"preinsert"<<endl;
+            //cout<<"preinsert"<<endl;
             diccionario.insert(arr, sign);
-            cout<<"postinsert"<<endl;
+            //cout<<"postinsert"<<endl;
             diccionario.printHT();
         }
         if (comm == "query"){

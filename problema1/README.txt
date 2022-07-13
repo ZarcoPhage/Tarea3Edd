@@ -29,3 +29,22 @@ Compilado a través de:
   g++ 10.2.1 20210110
 
 Los accesos a la HashTable del diccionario solo se cuentan en el caso de las consultas
+
+El archivo main.cpp es un código de prueba, para ocuparlo, ejecutar e ingresar los comandos:
+
+$ insert <termino> <significado> 
+    - para insertar termino en el diccionario (LEER COMENTARIOS DE FUNCIONES AL INTERIOR DEL ARCHIVO 'cache-diccionario.cpp')
+    - imprime la tabla posterior a la insercion con formato:
+        - para la primera línea:
+            $ <consultas totales> : <significados conocidos> : <significados desconocidos> : <limpiezas totales> : <significados encontrados> : <significados no encontrados> : <accesos totales>
+        - para cada ranura:    
+            $ <numero de ranura> : <termino> : <significado> : <significado vacio> : <estado> : <consultas>
+
+            *significado vacio : booleano que indica si el significado de un término se haya vacío
+            *estado: valor que indica si la ranura está vacia (-1), borrada (-2) u ocupada (-3)
+            *consultas : cantidad de consultas
+
+$ query <termino>
+    - para consultar por un termino al diccionario
+$ END
+    - para terminar de ocupar el diccionario e imprimir en pantalla la tabla correspondiente    
