@@ -63,49 +63,61 @@ void Dijkstra2(tGrafo* G, int* D, tVertice s) {
 }
 
 
-int shortestWeightedPath(tGrafo* G, int size, int* D){
-    tVertice s;
-    int i, o, sumaTotal;
-    sumaTotal = 0;
-    for(i = 0; i < G->nVertex(); i++){
-        s = i;
-        for (o = 0 ; o < size ; o++){
-            D[o] = INT_MAX;
-        }
-        D[s] = 0;
-        Dijkstra(G,D,i);
-        for(o = 0; o < G->nVertex(); o++){
-            sumaTotal += D[o];
-        }
-        G->restablecermarca();
-    }
-    return sumaTotal;
-}
-
-
-int caminocorto(tGrafo G, int size){
+int caminoCorto(tGrafo* G, int size){
 
     int sumatotal = 0;
-    G.restablecermarca();
-    for (int i = 0 ; i < G.nVertex() ; i++){
+    G->restablecermarca();
+    for (int i = 0 ; i < G->nVertex() ; i++){
 
-        int* D = new int [G.nVertex()];
-        for (int j = 0 ; j < G.nVertex() ; j++){
+        int* D = new int [G->nVertex()];
+        for (int j = 0 ; j < G->nVertex() ; j++){
 
             D[j] = INT_MAX;
         }
         D[i] = 0;
-        Dijkstra(&G, D, i);
-        for (int k = 0; k < G.nVertex() ; k++){
+        Dijkstra2(G, D, i);
+        for (int k = 0; k < G->nVertex() ; k++){
             
             sumatotal+= D[k];
         }
         delete [] D;
-        G.restablecermarca();
+        G->restablecermarca();
+    }
+    return sumatotal;
+}
+
+int caminoCortoPesos(tGrafo* G, int size){
+
+    int sumatotal = 0;
+    G->restablecermarca();
+    for (int i = 0 ; i < G->nVertex() ; i++){
+
+        int* D = new int [G->nVertex()];
+        for (int j = 0 ; j < G->nVertex() ; j++){
+
+            D[j] = INT_MAX;
+        }
+        D[i] = 0;
+        Dijkstra(G, D, i);
+        for (int k = 0; k < G->nVertex() ; k++){
+            
+            sumatotal+= D[k];
+        }
+        delete [] D;
+        G->restablecermarca();
     }
     return sumatotal;
 
 }
+
+/*
+unsigned long long factorial(int n) {
+   if(n == 0) return 1;
+   else if(n > 1) return n*factorial(n-1);
+   return 1;
+}
+*/
+
 
 
 int main(){
@@ -117,10 +129,17 @@ int main(){
     tGrafo grafo(size);
 
     crear_y_rellenar_matriz(&grafo);
+    /*
+    cout << grafo.isEdge(8, 1) << " " << grafo.weight(8,1) << endl;
 
-    cout << grafo.isEdge(0, 3) << " " << grafo.weight(0,3) << endl;
+    for (int i = 0 ; i < size ; i++){
+
+        cout << grafo.weight(0,i) << " - " ;
+
+    }
+    cout << "" << endl;
     cout << grafo.maxGrado()<<endl;
-
+    */
     string* array_nombres;
 
     size -= 1;
@@ -143,30 +162,48 @@ int main(){
     tVertice secundario;
     secundario = grafo.secondcharacter(D);
 
-    cout << "numero de vertices: " << grafo.nVertex() << endl;
-    cout << "numero de size: " << size << endl;
+    //cout << "numero de vertices: " << grafo.nVertex() << endl;
+    //cout << "numero de size: " << size << endl;
 
-    cout << "Personaje secundario: "  << array_nombres[secundario] << endl;
+    //cout << "Personaje secundario: "  << array_nombres[secundario] << endl;
 
     int suma;
 
-    suma = caminocorto(grafo, size);
+    suma = caminoCortoPesos(&grafo, size);
 
-    cout << " la suma es: " << suma << endl;
+    //cout << " la suma es: " << suma << endl;
 
     int sumaEdg;
 
-    sumaEdg = grafo.sumadearcos(&grafo);
+    sumaEdg = grafo.sumadearcos();
 
-    cout << " la sumaEdg es: " << sumaEdg << endl;
+    //cout << " la sumaEdg es: " << sumaEdg << endl;
 
     float f = suma;
     float l;
     l = f/sumaEdg;
 
-    cout << "la longuitud de camino promedio con pesos es: " << l << endl; 
+    //cout << "la longuitud de camino promedio con pesos es: " << l << endl; 
     
+    int suma2;
+
+    suma2 = caminoCorto(&grafo, size);
+    //cout << "suma2 = "  << suma2 << endl;
+
+    float combinatoria = ((76*75)/2);
+
+    float a = suma2/combinatoria;
+
+    //cout << combinatoria << endl;
+    //cout << a << endl;
+
+    cout << "Personaje Principal: "  << array_nombres[principal] << endl;
+    cout << "Personaje secundario mas relevante: " << array_nombres[secundario] << endl;
+    cout << "Diametro: " << a << endl;
+    cout << "Diametro (con pesos): " << l;
+
     delete [] array_nombres;
     delete [] D;
     return 0;
+
 }

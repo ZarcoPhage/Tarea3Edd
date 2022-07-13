@@ -162,15 +162,15 @@ void tGrafo::restablecermarca(){
     }
 }
 
-int tGrafo::sumadearcos(tGrafo* grafo){
+int tGrafo::sumadearcos(){
 
     int suma = 0;
-    int size = grafo->nVertex();
+    int size = this->nVertex();
     size -= 1;
     for (int i = 0 ; i < size ; i++){
         
         for (int j = i; j < size ; j++){
-            suma += p_matrix[i][j]; 
+            suma += this->weight(i, j); 
         }
     }
 

@@ -60,7 +60,7 @@ public:
 
     void restablecermarca();
 
-    int sumadearcos(tGrafo* grafo);
+    int sumadearcos();
 };
 
 #endif
