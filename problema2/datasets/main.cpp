@@ -90,7 +90,10 @@ int main(){
 
     tVertice principal = grafo.maxGrado();
     
-    Dijkstra(&grafo, D, grafo.maxGrado());
+
+    int size2 = grafo.nVertex();
+    D = new int [size2];
+    Dijkstra(&grafo, D, principal);
 
     tVertice secundario;
     secundario = grafo.secondcharacter(D);
