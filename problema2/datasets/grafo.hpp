@@ -57,6 +57,8 @@ public:
     tVertice maxGrado();
 
     tVertice secondcharacter(int* D);
+
+    void restablecermarca();
 };
 
 #endif

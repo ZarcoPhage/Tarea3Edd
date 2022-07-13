@@ -4,7 +4,7 @@
 #include <string>
 
 #define VISITADO 1
-#define NOVISITADO 0
+#define NOVISITADO -1
 
 using namespace std;
 
@@ -138,7 +138,8 @@ tVertice tGrafo::maxGrado(){
 
 tVertice tGrafo::secondcharacter(int* D){
 
-    int peso, mayor = 0;
+    int peso = 1; 
+    int mayor = 0;
     tVertice secundario;
 
     for (int i = 0 ; i < this->nVertex() ; i++ ){
@@ -152,3 +153,12 @@ tVertice tGrafo::secondcharacter(int* D){
     }
     return secundario;
 }
+
+void tGrafo::restablecermarca(){
+
+    for (int i = 0 ; i < this->nVertex() ; i++){
+
+        Marca[i] = NOVISITADO;
+    }
+}
+

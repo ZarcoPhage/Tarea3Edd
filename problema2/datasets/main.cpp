@@ -2,6 +2,7 @@
 #include <fstream>
 #include <cstring>
 #include <string>
+#include <climits>
 
 #include "tamanno_matriz.cpp"
 #include "grafo.hpp"
@@ -9,60 +10,55 @@
 #include "vertice_a_persona.cpp"
 
 
-#define NOVISITADO 0
+#define NOVISITADO -1
 #define VISITADO 1
-#define INFINITY 4000
+//#define INFINITY intmax_t
 
 using namespace std;
 
 
 int minVertex(tGrafo* G, int* D) {
     
-    int i, v = -1;
+    int i;
+    int v = -1;
     
-    for (i = 0 ; i < G->nVertex(); i++ ){
-        if (G->getMark(i) == NOVISITADO){ 
-            v = i;
-            break;
-        }
-    }
-    for (i++ ; i < G->nVertex() ; i++ ){ 
+    for (i = 0 ; i < G->nVertex(); i++ )
+        if (G->getMark(i) == NOVISITADO){ v = i; break; }
+    for (i++ ; i < G->nVertex() ; i++ ) 
         if ((G->getMark(i) == NOVISITADO) && (D[i] < D[v]))
-        v = i;
-    }
+            v = i;
+    
     return v;
 }
 
 void Dijkstra(tGrafo* G, int* D, tVertice s) {
-    
-    int size = G->nVertex();
-    
-    D = new int [size];
 
-    D[s] = 0;
-
-    for (int i = 0 ; i < size ; i++){
-
-        if (D[i] == 0){
-            break;
-        }
-        else{
-            D[i] = INFINITY;
-        }
-    }
-
-    int v, w;
-    for (int i = 0 ; i < G->nVertex() ; i++) { 
+    int i, v, w;
+    for (i = 0 ; i < G->nVertex() ; i++) { 
 
         v = minVertex(G, D);
-        if (D[v] == INFINITY){ 
-        return; 
-        }
+        if (D[v] == INT_MAX) return;
         G->setMark(v, VISITADO);
 
         for ( w = G->first(v) ; w < G->nVertex(); w = G->next(v,w) )
             if (D[w] > (D[v] + G->weight(v, w) ) )
                 D[w] = D[v] + G->weight(v, w);
+    }
+}
+
+
+void Dijkstra2(tGrafo* G, int* D, tVertice s) {
+
+    int i, v, w;
+    for (i = 0 ; i < G->nVertex() ; i++) { 
+
+        v = minVertex(G, D);
+        if (D[v] == INT_MAX) return;
+        G->setMark(v, VISITADO);
+
+        for ( w = G->first(v) ; w < G->nVertex(); w = G->next(v,w) )
+            if (D[w] > (D[v] + G->isEdge(v, w) ) )
+                D[w] = D[v] + G->isEdge(v, w);
     }
 }
 
@@ -91,12 +87,25 @@ int main(){
     tVertice principal = grafo.maxGrado();
     
 
-    int size2 = grafo.nVertex();
-    D = new int [size2];
+    //int size2 = grafo.nVertex();
+    D = new int [size];
+    
+    for (int i = 0 ; i < size ; i++){
+
+        D[i] = INT_MAX;
+    }
+    D[principal] = 0;
+
     Dijkstra(&grafo, D, principal);
 
     tVertice secundario;
     secundario = grafo.secondcharacter(D);
+
+    for (int i = 0 ; i < size ; i++){
+
+        cout << " posicion i:  " << i  << " Tiene peso de: " << D[i] << endl;
+
+    }
 
     cout << "Personaje secundario: "  << array_nombres[secundario] << endl;
 
