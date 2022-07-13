@@ -59,6 +59,8 @@ public:
     tVertice secondcharacter(int* D);
 
     void restablecermarca();
+
+    int sumadearcos(tGrafo* grafo);
 };
 
 #endif

@@ -63,6 +63,50 @@ void Dijkstra2(tGrafo* G, int* D, tVertice s) {
 }
 
 
+int shortestWeightedPath(tGrafo* G, int size, int* D){
+    tVertice s;
+    int i, o, sumaTotal;
+    sumaTotal = 0;
+    for(i = 0; i < G->nVertex(); i++){
+        s = i;
+        for (o = 0 ; o < size ; o++){
+            D[o] = INT_MAX;
+        }
+        D[s] = 0;
+        Dijkstra(G,D,i);
+        for(o = 0; o < G->nVertex(); o++){
+            sumaTotal += D[o];
+        }
+        G->restablecermarca();
+    }
+    return sumaTotal;
+}
+
+
+int caminocorto(tGrafo G, int size){
+
+    int sumatotal = 0;
+    G.restablecermarca();
+    for (int i = 0 ; i < G.nVertex() ; i++){
+
+        int* D = new int [G.nVertex()];
+        for (int j = 0 ; j < G.nVertex() ; j++){
+
+            D[j] = INT_MAX;
+        }
+        D[i] = 0;
+        Dijkstra(&G, D, i);
+        for (int k = 0; k < G.nVertex() ; k++){
+            
+            sumatotal+= D[k];
+        }
+        delete [] D;
+        G.restablecermarca();
+    }
+    return sumatotal;
+
+}
+
 
 int main(){
 
@@ -86,8 +130,6 @@ int main(){
 
     tVertice principal = grafo.maxGrado();
     
-
-    //int size2 = grafo.nVertex();
     D = new int [size];
     
     for (int i = 0 ; i < size ; i++){
@@ -101,14 +143,29 @@ int main(){
     tVertice secundario;
     secundario = grafo.secondcharacter(D);
 
-    for (int i = 0 ; i < size ; i++){
-
-        cout << " posicion i:  " << i  << " Tiene peso de: " << D[i] << endl;
-
-    }
+    cout << "numero de vertices: " << grafo.nVertex() << endl;
+    cout << "numero de size: " << size << endl;
 
     cout << "Personaje secundario: "  << array_nombres[secundario] << endl;
 
+    int suma;
+
+    suma = caminocorto(grafo, size);
+
+    cout << " la suma es: " << suma << endl;
+
+    int sumaEdg;
+
+    sumaEdg = grafo.sumadearcos(&grafo);
+
+    cout << " la sumaEdg es: " << sumaEdg << endl;
+
+    float f = suma;
+    float l;
+    l = f/sumaEdg;
+
+    cout << "la longuitud de camino promedio con pesos es: " << l << endl; 
+    
     delete [] array_nombres;
     delete [] D;
     return 0;
