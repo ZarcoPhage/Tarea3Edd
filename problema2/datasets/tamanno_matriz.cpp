@@ -5,7 +5,19 @@
 
 using namespace std;
 
-
+/*****
+*   tVertice* str_to_int_array
+******
+*   Crea un arreglo con la información de la línea entregada,
+*   sin el componente ';'.
+******
+*   Input:
+*   string line : Linea a guardar en el arreglo.
+*   int* n : Tamaño del arreglo a crear.
+******
+*   Returns:
+*   tVertice*, arreglo con los números que contiene la línea entregada.
+*****/
 int tamanno_matriz (int& size){
 
     ifstream file;
